@@ -77,3 +77,21 @@ y_hls = hls_model.predict(np.ascontiguousarray(X_test)).reshape(-1)
 mae = float(np.mean(np.abs(y_hls - y_true)))
 print("HLS emu MAE:", mae)
 print("y_hls min/max:", float(y_hls.min()), float(y_hls.max()))
+
+
+# Save into .dat files for C/RTL co-simulation
+# --- write tb_data for HLS cosim ---
+import os, numpy as np
+N = 1024  # how many samples to test
+
+# X_test must be the *raw* features your model expects (same ones you use for emu).
+Xc = np.ascontiguousarray(X_test[:N], dtype=np.float32)
+y_ref = model.predict(Xc, verbose=0).reshape(-1)  # same Keras model you converted
+
+tb_dir = os.path.join("hls4ml_prj", "tb_data")  # OUTDIR_NO_SPACES is your hls4ml_prj folder
+os.makedirs(tb_dir, exist_ok=True)
+
+np.savetxt(os.path.join(tb_dir, "tb_input_features.dat"),  Xc,   fmt="%.10e")
+np.savetxt(os.path.join(tb_dir, "tb_output_predictions.dat"), y_ref, fmt="%.10e")
+
+print("Wrote tb_data to:", tb_dir)

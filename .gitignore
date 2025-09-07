@@ -15,7 +15,7 @@ prepared/
 # hls4ml artifacts (reproducible)
 hls4ml_prj/*_prj/
 hls4ml_prj/**/solution*/**
-tb_data/
+# tb_data/
 
 # Vivado/Vitis build junk
 *.xpr
