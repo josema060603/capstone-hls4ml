@@ -9,7 +9,7 @@ data/
 prepared/
 *.npy
 *.h5
-*.keras
+# *.keras
 *.hdf5
 
 # hls4ml artifacts (reproducible)
