@@ -20,7 +20,7 @@
 
 
 // hls-fpga-machine-learning insert layer-precision
-typedef ap_fixed<24,12> input_t;
+typedef ap_fixed<16,12> input_t;
 typedef ap_fixed<16,10> qdense1_accum_t;
 typedef ap_fixed<16,10> layer2_t;
 typedef ap_fixed<8,4> weight2_t;

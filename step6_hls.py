@@ -27,8 +27,8 @@ import hls4ml
 cfg = hls4ml.utils.config_from_keras_model(model, granularity='name')
 cfg['Model']['ReuseFactor'] = 32  # default for any layer not overridden
 cfg['LayerName']['qdense1']['ReuseFactor'] = 32   # 1536/32 ≈ 48 parallel mult
-cfg['LayerName']['qdense2']['ReuseFactor'] = 64   # 2048/64 ≈ 32 parallel mult
-
+cfg['LayerName']['qdense2']['ReuseFactor'] = 32   # 2048/64 ≈ 32 parallel mult
+cfg['Model']['Strategy'] = 'Resource'
 # 2) IO tensor names
 in_name  = model.input.name.split(':')[0]
 out_name = model.output.name.split(':')[0]
@@ -43,7 +43,7 @@ print("x_max:", x_max, "y_max:", y_max)
 
 # 4) Widen INPUT; keep OUTPUT reasonable (±32 is fine for y_max≈24)
 cfg['LayerName'].setdefault(in_name, {}).setdefault('Precision', {})
-cfg['LayerName'][in_name]['Precision']['result'] = 'ap_fixed<24,12>'
+cfg['LayerName'][in_name]['Precision']['result'] = 'ap_fixed<16,12>'
 
 cfg['LayerName'].setdefault(out_name, {}).setdefault('Precision', {})
 cfg['LayerName'][out_name]['Precision']['result'] = 'ap_fixed<16,6>'

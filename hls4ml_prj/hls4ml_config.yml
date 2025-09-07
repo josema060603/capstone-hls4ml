@@ -5,7 +5,7 @@ HLSConfig:
   LayerName:
     in_x:
       Precision:
-        result: ap_fixed<24,12>
+        result: ap_fixed<16,12>
       Trace: false
     qact1:
       Precision:
@@ -35,7 +35,7 @@ HLSConfig:
         bias: fixed<8,4,TRN,WRAP,0>
         result: ap_fixed<16,10>
         weight: fixed<8,3,TRN,WRAP,0>
-      ReuseFactor: 64
+      ReuseFactor: 32
       Trace: false
     qdense2_alpha:
       Precision: auto
@@ -62,7 +62,7 @@ HLSConfig:
     Precision:
       default: fixed<16,6>
     ReuseFactor: 32
-    Strategy: Latency
+    Strategy: Resource
     TraceOutput: false
 IOType: io_parallel
 InputData: null
@@ -71,7 +71,7 @@ OutputDir: /home/jbarrios30/capstone2/hls4ml_prj
 OutputPredictions: null
 Part: xc7z020clg400-1
 ProjectName: myproject
-Stamp: c7b12f5e
+Stamp: 8017caf9
 Version: 1.0.0
 WriterConfig:
   Namespace: null
