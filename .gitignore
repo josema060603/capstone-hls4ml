@@ -29,3 +29,6 @@ tb_data/
 
 # Secrets / local config
 .env
+
+# installers
+Miniconda3-latest-*.sh
