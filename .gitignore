@@ -1,0 +1,31 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data / models (track with Git LFS instead if you need them)
+data/
+prepared/
+*.npy
+*.h5
+*.keras
+*.hdf5
+
+# hls4ml artifacts (reproducible)
+hls4ml_prj/*_prj/
+hls4ml_prj/**/solution*/**
+tb_data/
+
+# Vivado/Vitis build junk
+*.xpr
+*.xsa
+*.runs/
+*.cache/
+*.sim/
+*.ip_user_files/
+*.jou
+*.log
+
+# Secrets / local config
+.env

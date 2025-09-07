@@ -1,0 +1,79 @@
+Backend: Vitis
+ClockPeriod: 10
+ClockUncertainty: 27%
+HLSConfig:
+  LayerName:
+    in_x:
+      Precision:
+        result: ap_fixed<24,12>
+      Trace: false
+    qact1:
+      Precision:
+        result: ufixed<8,4,RND_CONV,SAT,0>
+      Trace: false
+    qact2:
+      Precision:
+        result: ufixed<8,4,RND_CONV,SAT,0>
+      Trace: false
+    qdense1:
+      Precision:
+        accum: ap_fixed<32,16>
+        bias: fixed<8,4,TRN,WRAP,0>
+        result: ap_fixed<24,12>
+        weight: fixed<8,4,TRN,WRAP,0>
+      ReuseFactor: 32
+      Trace: false
+    qdense1_alpha:
+      Precision: auto
+    qdense1_linear:
+      Precision:
+        result: auto
+      Trace: false
+    qdense2:
+      Precision:
+        accum: ap_fixed<32,16>
+        bias: fixed<8,4,TRN,WRAP,0>
+        result: ap_fixed<24,12>
+        weight: fixed<8,3,TRN,WRAP,0>
+      ReuseFactor: 64
+      Trace: false
+    qdense2_alpha:
+      Precision: auto
+    qdense2_linear:
+      Precision:
+        result: auto
+      Trace: false
+    y:
+      Precision:
+        accum: ap_fixed<32,16>
+        bias: auto
+        result: ap_fixed<24,12>
+        weight: auto
+      Trace: false
+    y/BiasAdd:
+      Precision:
+        result: ap_fixed<16,6>
+    y_linear:
+      Precision:
+        result: auto
+      Trace: false
+  Model:
+    BramFactor: 1000000000
+    Precision:
+      default: fixed<16,6>
+    ReuseFactor: 32
+    Strategy: Latency
+    TraceOutput: false
+IOType: io_parallel
+InputData: null
+KerasModel: !keras_model '/home/jbarrios30/capstone2/hls4ml_prj/keras_model.keras'
+OutputDir: /home/jbarrios30/capstone2/hls4ml_prj
+OutputPredictions: null
+Part: xc7z020clg400-1
+ProjectName: myproject
+Stamp: 888adf8e
+Version: 1.0.0
+WriterConfig:
+  Namespace: null
+  WriteTar: false
+  WriteWeightsTxt: true
