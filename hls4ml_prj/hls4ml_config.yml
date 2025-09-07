@@ -17,9 +17,9 @@ HLSConfig:
       Trace: false
     qdense1:
       Precision:
-        accum: ap_fixed<24,12>
+        accum: ap_fixed<16,10>
         bias: fixed<8,4,TRN,WRAP,0>
-        result: ap_fixed<24,12>
+        result: ap_fixed<16,10>
         weight: fixed<8,4,TRN,WRAP,0>
       ReuseFactor: 32
       Trace: false
@@ -31,9 +31,9 @@ HLSConfig:
       Trace: false
     qdense2:
       Precision:
-        accum: ap_fixed<24,12>
+        accum: ap_fixed<16,10>
         bias: fixed<8,4,TRN,WRAP,0>
-        result: ap_fixed<24,12>
+        result: ap_fixed<16,10>
         weight: fixed<8,3,TRN,WRAP,0>
       ReuseFactor: 64
       Trace: false
@@ -45,9 +45,9 @@ HLSConfig:
       Trace: false
     y:
       Precision:
-        accum: ap_fixed<24,12>
+        accum: ap_fixed<16,10>
         bias: auto
-        result: ap_fixed<24,12>
+        result: ap_fixed<16,10>
         weight: auto
       Trace: false
     y/BiasAdd:
@@ -71,7 +71,7 @@ OutputDir: /home/jbarrios30/capstone2/hls4ml_prj
 OutputPredictions: null
 Part: xc7z020clg400-1
 ProjectName: myproject
-Stamp: df80b209
+Stamp: c7b12f5e
 Version: 1.0.0
 WriterConfig:
   Namespace: null
