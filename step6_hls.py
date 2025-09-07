@@ -55,7 +55,7 @@ dense_names = [l.name for l in model.layers
                if isinstance(l, QDense) or isinstance(l, keras.layers.Dense)]
 for n in dense_names:
     cfg['LayerName'].setdefault(n, {}).setdefault('Precision', {})
-    cfg['LayerName'][n]['Precision']['accum']  = 'ap_fixed<32,16>'
+    cfg['LayerName'][n]['Precision']['accum']  = 'ap_fixed<24,12>'
     cfg['LayerName'][n]['Precision']['result'] = 'ap_fixed<24,12>'
 
 # 6) Convert, emulate, and check MAE
