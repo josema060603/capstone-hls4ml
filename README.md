@@ -18,33 +18,23 @@ End‑to‑end pipeline to train a quantized Keras model, convert it with **hls4
 ```
 capstone-hls4ml/
 ├─ prepared/                 # Saved numpy datasets (e.g., X_test.npy)
-├─ models/                   # Saved Keras/QKeras models (.h5 / .keras)
+├─ .keras_models                  # Saved Keras/QKeras models (.keras)
 ├─ scripts/
 │  ├─ make_tb_data.py        # Generate tb_data from Keras model
-│  └─ (utils & helpers)
+│  └─build_prj.tcl             # Open solution, export IP, etc.
 ├─ hls4ml_prj/               # hls4ml output project (convert step)
 │  ├─ firmware/              # C++ top & weights
 │  ├─ tb_data/               # tb_input_features.dat / tb_output_predictions.dat
 │  ├─ myproject_prj/         # Vitis HLS project folder
 │  │  └─ solution1/          # csim, sim/verilog, syn, impl/ip, reports
 │  └─ hls4ml_config.yml      # Optional reconversion config
-├─ step5_qtest.py            # Load saved model & evaluate (test file)
-├─ step6_hls.py              # Convert to hls4ml + emu + (optional) build hooks
-├─ build_prj.tcl             # Open solution, export IP, etc.
+├─ export/ #IP
+│  ├─ hdl/              # hdl synthetized in either VHDL or Verilog
 ├─ README.md                 # This file
 └─ .gitignore
 ```
 
-> Tip: Keep generated folders out of Git when possible (e.g., `*_prj/solution*/{csim,sim,syn,impl}`), but **do** keep scripts and configs.
 
----
-
-## 🧪 Reproduce model test
-
-```bash
-python3 step5_qtest.py
-# prints TF/Keras versions and Test MAE (°C)
-```
 
 ---
 
@@ -147,12 +137,6 @@ vitis_hls -p %CD%\hls4ml_prj\myproject_prj -eval "open_solution solution1; csynt
 
 ---
 
-## 📊 Example HLS Results (representative)
-
-* **Latency:** \~105 cycles at 100 MHz (≈1.05 µs); **II ≈ 32**
-* **Slack:** ≈ +0.27 ns @ 10 ns clock
-* **Resources:** BRAM \~31 (11%), **DSP \~65 (29%)**, FF \~41k (38%), **LUT \~50k (94%)**
-
 Levers:
 
 * ↑ **ReuseFactor** → ↓ area, ↑ II & latency.
@@ -163,21 +147,10 @@ Levers:
 
 ## 📦 Export IP & Vivado Integration
 
-**Export:**
-
-```tcl
-# build_prj.tcl
-open_project $::env(PROJ)              ;# e.g., hls4ml_prj/myproject_prj
-open_solution solution1
-export_design -format ip_catalog -rtl verilog -vendor user.org -library hls -version 1.0
-exit
-```
 
 Run:
 
 ```bat
-set PROJ=C:\Users\<you>\workspace\capstone2\hls4ml_prj\myproject_prj
-call "C:\Xilinx\Vitis\2023.1\settings64.bat"
 vitis_hls -f build_prj.tcl
 ```
 
@@ -189,8 +162,8 @@ This creates `impl/ip/export.zip`. Unzip and **Add Repository** in Vivado to the
 * `s_axi_CTRL` → AXI‑Lite to PS (Address Editor → Assign)
 * Data:
 
-  * **`io_stream`** → AXI DMA (MM2S→input, S2MM→output) + optional AXIS FIFOs
-  * **`io_parallel`** → map wide ports via BRAM/GPIO wrapper or rebuild as stream
+  * **`io_stream`** → similar to AXI-stream
+  * **`io_parallel`** → map wide ports
 
 ---
 
