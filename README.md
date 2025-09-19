@@ -180,7 +180,7 @@ This creates `impl/ip/export.zip`. Unzip and **Add Repository** in Vivado to the
 ## 📜 License & Credits
 
 * Built on **TensorFlow**, **QKeras**, **hls4ml**, **Vitis/Vivado**.
-* Include your project license here (e.g., MIT) and acknowledge tool authors.
+
 
 ---
 
