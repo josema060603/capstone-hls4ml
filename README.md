@@ -1,6 +1,6 @@
 # Capstone: Keras → QKeras → hls4ml → Vitis/Vivado (Zynq-7020)
 
-End‑to‑end pipeline to train a quantized Keras model, convert it with **hls4ml**, verify via **C/RTL co‑simulation**, and export a **packaged IP** for integration in **Vivado** (Zynq‑7020 / xc7z020‑clg400‑1).
+End‑to‑end pipeline to train a quantized Keras model, convert it with **hls4ml**, verify via **C/RTL co‑simulation**, and export a **packaged IP** for integration in **Vivado** (Zynq‑7020 / xc7z020‑clg400‑1). For testing, abstracted inside a AXI port with MMIO.
 
 ---
 
