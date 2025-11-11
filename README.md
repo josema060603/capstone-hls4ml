@@ -19,6 +19,7 @@ End‑to‑end pipeline to train a quantized Keras model, convert it with **hls4
 capstone-hls4ml/
 ├─ prepared/                 # Saved numpy datasets (e.g., X_test.npy)
 ├─ .keras_models                  # Saved Keras/QKeras models (.keras)
+├─ ip_repo/                  # ML model integrated with AXI interconnect
 ├─ scripts/
 │  ├─ make_tb_data.py        # Generate tb_data from Keras model
 │  └─build_prj.tcl             # Open solution, export IP, etc.
